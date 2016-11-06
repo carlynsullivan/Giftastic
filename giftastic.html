@@ -1,0 +1,184 @@
+<!-- html and css structure and styling
+	- top of page for button placement?
+	- gifs to display below
+	- css styling
+array of the topic of my choosing
+dynamic button creation
+calling with ajax
+url for giphy, method=GET
+parameters needed:
+	- q=florida images? (pick topic)
+	- limit=10
+	- rating=g
+capture gif images from giphy.
+.on("click") events
+	- first click to start videos
+	- second click to stop videos
+capture and display ratings for each gif -->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<title>Giftastic</title>
+
+</head>
+
+<body>
+
+<style type="text/css">
+	.gifButton {
+		margin: 20px;
+	}
+
+	#gifHolder {
+		justify-content: center;
+	}
+</style>
+
+	<header>Giphy Finder</header>
+
+	<div class="main-container">
+
+	<div id="buttonHolder">
+		
+	</div>
+
+	<form>
+
+		<p>Topic search: </p>
+		<input type="text" class="userDessert">
+
+		<input type="submit" id="submitButton">
+	</form>
+
+	<br>
+
+	<div id="gifHolder" class="col-lg-12">
+		
+	</div>
+
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+
+		var desserts = ["key lime pie", "ice cream", "cookies", "nutter butters", "flan", "candy"];
+
+		function renderButtons(){ 
+
+		// Deletes the movies prior to adding new movies (this is necessary otherwise you will have repeat buttons)
+		$("#buttonHolder").empty();
+
+		// Loops through the array of movies
+		for (var i = 0; i < desserts.length; i++) {
+
+			// Then dynamicaly generates buttons for each movie in the array
+    		var newButton = $("<button>");
+    		newButton.attr("class", "dessertButton");
+    		newButton.html(desserts[i]);
+    		newButton.data("name", desserts[i]);
+
+    		$("#buttonHolder").append(newButton);
+
+    	}
+
+	};
+
+
+		
+
+	$("#submitButton").on("click", function() {
+		var userDessert = $(".userDessert").val();
+		console.log(userDessert);
+		desserts.push(userDessert);
+		renderButtons();
+		return false;
+	});
+
+	renderButtons();
+
+ $(".dessertButton").on("click", function() {
+
+ 	var name = $(this).data("name");
+ 	console.log(name);
+
+	// var API = "";
+	
+	var urlQuery = "http://api.giphy.com/v1/gifs/search?q=" + name + "&limit=10&rating=g&api_key=dc6zaTOxFJmzC";
+
+	var request = {
+		url: urlQuery,
+		method: "GET"
+	};
+
+	$.ajax(request).done(function(response) {
+		console.log(response);
+		for (i=0; i < response.data.length; i++) {
+			var stillImage = response.data[i].images.fixed_height_still.url;
+			var rating = response.data[i].rating;
+			var gif = $("<button><p> Rating: " + rating.toUpperCase() + "</p><img src='" + stillImage +"'></button>");
+			gif.data('stillImage', response.data[i].images.fixed_height_still.url);
+			gif.data('animated', response.data[i].images.fixed_height.url);
+			gif.addClass("gifButton");
+			// gif.data("name", data[i]);
+			$("#gifHolder").prepend(gif);
+			
+		
+	};
+		
+			//onclick event for prepended gif still images to animate
+			$(".gifButton").on("click", function() {
+				var animatedImage = $(this).data('animated');
+				var stillImage = $(this).data('stillImage');
+				if ($(this).find("img").attr("src") == stillImage) {
+					$(this).find("img").attr("src", animatedImage);
+				} else {
+					$(this).find("img").attr("src", stillImage);
+				}
+				// var movingGif = response.name.images.fixed_height.url;
+				// var gif = $("<img src='" + movingGif + "'>");
+				// $(this).html(gif);
+		});
+
+	});
+});
+
+});
+
+
+	// // var request = 
+
+ // 	jQuery.ajax({
+	// 	url: urlQuery,
+	// 	method: "GET"
+	// })
+
+ // 	.done(function(response) {
+			
+	// 	console.log(response);
+	
+		
+		
+
+	// 	});
+// };
+	
+
+
+	</script>
+
+</body>
+</html>
