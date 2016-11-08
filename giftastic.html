@@ -25,8 +25,11 @@
 	<!--jumbotron with header, instructions, user input field-->
 	<div class="jumbotron">
 		<h1>Dessert Gif Finder!</h1>
-		<p>Click an already existing dessert button to populate a list of gifs below.</p>
-		<p>You can also type in your own dessert, add a button for it, and view gifs for that dessert by clicking on your newly created button.</p>
+		<p>Click a dessert button below to display pictures.<br>
+		Then, clicking a picture will animate the gif.<br>
+		Click one more time to return to a still image.<br><br>
+		You can also type in your own dessert preference below and click submit.<br>
+		This will make a new button you can click to display pictures.</p>
   		<!--user input form within jumbotron-->
   		<form>
 			<p>Add your own dessert button: </p>
@@ -40,7 +43,6 @@
 		<!--buttons from array & dynamic creation go here-->
 		<div id="buttonHolder"></div>
 
-		<br>
 		<!--gifs from Giphy API data go here-->
 		<div id="gifHolder" class="col-lg-12"></div>
 

@@ -1,6 +1,8 @@
 	.jumbotron {
+		padding-top: 10px;
 		color: salmon;
 		background-color: navy;
+		margin-bottom: 0px;
 	}
 
 	h1 {
@@ -24,22 +26,36 @@
 		align-self: center;
 	}
 
+	input {
+		color: black;
+	}
+
 	#buttonHolder {
+		margin-top: 0px;
+		margin-bottom: 2px;
+		padding: 20px;
 		background-color: salmon;
-		align-content: center;
+		text-align: center;
 		width: 100%;
+		box-shadow: 2px 2px darkgray;
 	}
 
 	.dessertButton {
+		font-weight: bolder;
 		text-align: center;
-		margin-top: 20px;
-		margin-bottom: 20px;
+		margin: 10px;
+		box-shadow: 2px 2px darkgray;
 	}
 
 	.gifButton {
 		margin: 20px;
+		background-color: white;
+		font-weight: bolder;
 	}
 
 	#gifHolder {
+		margin-top: 0px;
+		text-align: center;
 		justify-content: center;
+		background-color: navy;
 	}
