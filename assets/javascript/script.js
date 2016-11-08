@@ -31,7 +31,7 @@ function renderButtons(){
 
 			
 			//Giphy API url plus specific queries requested, including dessert name from array
-			var urlQuery = "http://api.giphy.com/v1/gifs/search?q=" + name + "&limit=10&rating=g&api_key=dc6zaTOxFJmzC";
+			var urlQuery = "https://api.giphy.com/v1/gifs/search?q=" + name + "&limit=10&rating=g&api_key=dc6zaTOxFJmzC";
 
 			//created variable for API data request to be made
 			var request = {
