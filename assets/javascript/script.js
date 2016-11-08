@@ -103,7 +103,9 @@ function renderButtons(){
 		//call renderButtons function after addition of user input
 		renderButtons();
 		
-		//userDessert.html(""); .reset() .hide() .clear() <-- none of these allow clearing input after clicking submit, while still keeping the input value stored in array to then create a button. !!!
+		$(".userDessert").val("");
+		console.log(desserts);
+		//userDessert.html(""); .reset() .hide() .clear() <-- none of these allow clearing input after clicking submit, while still keeping the input value stored in array to then create a button. !!! try .val("") or .empty
 
 		//ensures that user can either click #submitButton OR press enter
 		return false;
